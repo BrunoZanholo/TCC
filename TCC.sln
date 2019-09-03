@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.IdentityServer", "TCC.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.FrontEnd", "TCC.FrontEnd\TCC.FrontEnd.csproj", "{BEA1818B-DEA6-4435-9E02-524F0841488A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E628799-E66A-4F6B-95EA-84C5360F7FE9}"
+	ProjectSection(SolutionItems) = preProject
+		File.txt = File.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

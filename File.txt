@@ -1,0 +1,3 @@
+SQL: dbserver-tcc.database.windows.net
+usuário: tcc
+senha: puc@2019
