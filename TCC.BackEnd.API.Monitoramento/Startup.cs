@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using IdentityServer4.AccessTokenValidation;
 
 namespace TCC.BackEnd.API.Monitoramento
 {
@@ -25,6 +27,17 @@ namespace TCC.BackEnd.API.Monitoramento
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+        .AddIdentityServerAuthentication(options =>
+        {
+            options.Authority = "http://localhost:3000"; // Auth Server
+                        options.RequireHttpsMetadata = false;
+            options.ApiName = "tcc_auth"; // API Resource Id
+                    });
+
+            services.AddDbContext<TCCBackEndAPIMonitoramentoContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("TCCBackEndAPIMonitoramentoContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +48,9 @@ namespace TCC.BackEnd.API.Monitoramento
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+            app.UseDeveloperExceptionPage();
+            app.UseAuthentication();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

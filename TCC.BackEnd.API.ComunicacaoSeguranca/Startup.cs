@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace WTCC.BackEnd.API.ComunicacaoSeguranca
+namespace TCC.BackEnd.API.ComunicacaoSeguranca
 {
     public class Startup
     {

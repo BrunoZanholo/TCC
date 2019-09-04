@@ -14,17 +14,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.CadastrosAtivos", "TCC.BackEnd.API.CadastrosAtivos\TCC.BackEnd.API.CadastrosAtivos.csproj", "{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.ComunicacaoSeguranca", "WTCC.BackEnd.API.ComunicacaoSeguranca\TCC.BackEnd.API.ComunicacaoSeguranca.csproj", "{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.ComunicacaoSeguranca", "TCC.BackEnd.API.ComunicacaoSeguranca\TCC.BackEnd.API.ComunicacaoSeguranca.csproj", "{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.Monitoramento", "TCC.BackEnd.API.Monitoramento\TCC.BackEnd.API.Monitoramento.csproj", "{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.Monitoramento", "TCC.BackEnd.API.Monitoramento\TCC.BackEnd.API.Monitoramento.csproj", "{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.Inteligencia", "TCC.BackEnd.API.Inteligencia\TCC.BackEnd.API.Inteligencia.csproj", "{CBDC8624-5D4D-4B6A-9691-9B955586B5E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.Inteligencia", "TCC.BackEnd.API.Inteligencia\TCC.BackEnd.API.Inteligencia.csproj", "{CBDC8624-5D4D-4B6A-9691-9B955586B5E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.Relatorios", "TCC.BackEnd.API.Relatorios\TCC.BackEnd.API.Relatorios.csproj", "{0A116578-C15B-439B-B65D-267EEA96C4BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.Relatorios", "TCC.BackEnd.API.Relatorios\TCC.BackEnd.API.Relatorios.csproj", "{0A116578-C15B-439B-B65D-267EEA96C4BE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackEnd", "BackEnd", "{D2422164-FA10-4EF6-8A84-D40273161D9D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{18A336BC-B6AF-4828-A1E6-7B31226BE5B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{EF31D444-BE64-45AD-9D3C-12697C637526}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Externos", "Externos", "{BAB7FEDE-6248-48C0-8DD7-70C7D2D4FF8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +69,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{B265A742-2A71-4330-8043-9475B6AC69AC} = {EF31D444-BE64-45AD-9D3C-12697C637526}
 		{BEA1818B-DEA6-4435-9E02-524F0841488A} = {18A336BC-B6AF-4828-A1E6-7B31226BE5B5}
 		{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA} = {D2422164-FA10-4EF6-8A84-D40273161D9D}
 		{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2} = {D2422164-FA10-4EF6-8A84-D40273161D9D}

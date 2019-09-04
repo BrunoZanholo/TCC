@@ -35,7 +35,7 @@ namespace TCC.IdentityServer
                 new Client
                 {
                     ClientId = "tcc_auth_client",
-                    ClientName = "Fiver.Security.AuthServer.Client",
+                    ClientName = "TCC.Auth.Client",
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
