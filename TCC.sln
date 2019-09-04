@@ -5,12 +5,26 @@ VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.IdentityServer", "TCC.IdentityServer\TCC.IdentityServer.csproj", "{B265A742-2A71-4330-8043-9475B6AC69AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.FrontEnd", "TCC.FrontEnd\TCC.FrontEnd.csproj", "{BEA1818B-DEA6-4435-9E02-524F0841488A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.FrontEnd", "TCC.FrontEnd\TCC.FrontEnd.csproj", "{BEA1818B-DEA6-4435-9E02-524F0841488A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E628799-E66A-4F6B-95EA-84C5360F7FE9}"
 	ProjectSection(SolutionItems) = preProject
 		File.txt = File.txt
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.CadastrosAtivos", "TCC.BackEnd.API.CadastrosAtivos\TCC.BackEnd.API.CadastrosAtivos.csproj", "{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.ComunicacaoSeguranca", "WTCC.BackEnd.API.ComunicacaoSeguranca\TCC.BackEnd.API.ComunicacaoSeguranca.csproj", "{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.Monitoramento", "TCC.BackEnd.API.Monitoramento\TCC.BackEnd.API.Monitoramento.csproj", "{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.Inteligencia", "TCC.BackEnd.API.Inteligencia\TCC.BackEnd.API.Inteligencia.csproj", "{CBDC8624-5D4D-4B6A-9691-9B955586B5E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.Relatorios", "TCC.BackEnd.API.Relatorios\TCC.BackEnd.API.Relatorios.csproj", "{0A116578-C15B-439B-B65D-267EEA96C4BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackEnd", "BackEnd", "{D2422164-FA10-4EF6-8A84-D40273161D9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{18A336BC-B6AF-4828-A1E6-7B31226BE5B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +40,37 @@ Global
 		{BEA1818B-DEA6-4435-9E02-524F0841488A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEA1818B-DEA6-4435-9E02-524F0841488A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEA1818B-DEA6-4435-9E02-524F0841488A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBDC8624-5D4D-4B6A-9691-9B955586B5E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDC8624-5D4D-4B6A-9691-9B955586B5E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDC8624-5D4D-4B6A-9691-9B955586B5E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDC8624-5D4D-4B6A-9691-9B955586B5E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A116578-C15B-439B-B65D-267EEA96C4BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A116578-C15B-439B-B65D-267EEA96C4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A116578-C15B-439B-B65D-267EEA96C4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A116578-C15B-439B-B65D-267EEA96C4BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BEA1818B-DEA6-4435-9E02-524F0841488A} = {18A336BC-B6AF-4828-A1E6-7B31226BE5B5}
+		{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA} = {D2422164-FA10-4EF6-8A84-D40273161D9D}
+		{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2} = {D2422164-FA10-4EF6-8A84-D40273161D9D}
+		{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E} = {D2422164-FA10-4EF6-8A84-D40273161D9D}
+		{CBDC8624-5D4D-4B6A-9691-9B955586B5E6} = {D2422164-FA10-4EF6-8A84-D40273161D9D}
+		{0A116578-C15B-439B-B65D-267EEA96C4BE} = {D2422164-FA10-4EF6-8A84-D40273161D9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A806518-1E65-49A8-A713-76095A135B95}

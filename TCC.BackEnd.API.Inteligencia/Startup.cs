@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
-namespace TCC.IdentityServer
+namespace TCC.BackEnd.API.Inteligencia
 {
     public class Startup
     {
@@ -22,24 +23,19 @@ namespace TCC.IdentityServer
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
-            services.AddIdentityServer()
-                        .AddDeveloperSigningCredential(filename: "tempkey.rsa")
-                        .AddInMemoryApiResources(Config.GetApiResources())
-                        .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                        .AddInMemoryClients(Config.GetClients())
-                        .AddTestUsers(Config.GetUsers());
-
+        {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseDeveloperExceptionPage();
-            app.UseIdentityServer();
-            app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseMvc();
         }
     }
 }

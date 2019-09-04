@@ -9,7 +9,6 @@ namespace TCC.IdentityServer
 {
     public class Config
     {
-        // scopes define the resources in your system
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
@@ -19,32 +18,40 @@ namespace TCC.IdentityServer
             };
         }
 
-        // clients want to access resources (aka scopes)
+        public static IEnumerable<ApiResource> GetApiResources()
+        {
+            return new List<ApiResource>
+            {
+                new ApiResource("tcc_auth", "TCC.Auth")
+            };
+        }
+
         public static IEnumerable<Client> GetClients()
         {
-            // client credentials client
             return new List<Client>
             {
-                // OpenID Connect implicit flow client (MVC)
+                // Hybrid Flow = OpenId Connect + OAuth
+                // To use both Identity and Access Tokens
                 new Client
                 {
-                    ClientId = "tcc-front-end",
-                    ClientName = "TCC Front-End",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    ClientId = "tcc_auth_client",
+                    ClientName = "Fiver.Security.AuthServer.Client",
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+                    AllowOfflineAccess = true,
                     RequireConsent = false,
 
-                    RedirectUris = { "http://localhost:5001/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:5001/signout-callback-oidc" },
+                    RedirectUris = { "http://localhost:3001/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:3001/signout-callback-oidc" },
 
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        IdentityServerConstants.StandardScopes.Email,
-                        IdentityServerConstants.StandardScopes.Address,
-                        "website"
-                    }
-                }
+                        "tcc_auth"
+                    },
+                },              
             };
         }
 
