@@ -14,4 +14,8 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TCC.BackEnd.API.Core\TCC.BackEnd.API.Core.csproj" />
+  </ItemGroup>
+
 </Project>

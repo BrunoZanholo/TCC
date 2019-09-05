@@ -14,46 +14,46 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class SensoresController : ControllerBase
+    public class AreasController : ControllerBase
     {
         private readonly CoreContext _context;
 
-        public SensoresController(CoreContext context)
+        public AreasController(CoreContext context)
         {
             _context = context;
         }
 
-        // GET: api/Sensores
+        // GET: api/Areas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Sensor>>> GetSensor()
+        public async Task<ActionResult<IEnumerable<Area>>> GetAreas()
         {
-            return await _context.Sensores.ToListAsync();
+            return await _context.Areas.ToListAsync();
         }
 
-        // GET: api/Sensores/5
+        // GET: api/Areas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Sensor>> GetSensor(int id)
+        public async Task<ActionResult<Area>> GetArea(int id)
         {
-            var sensor = await _context.Sensores.FindAsync(id);
+            var area = await _context.Areas.FindAsync(id);
 
-            if (sensor == null)
+            if (area == null)
             {
                 return NotFound();
             }
 
-            return sensor;
+            return area;
         }
 
-        // PUT: api/Sensores/5
+        // PUT: api/Areas/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSensor(int id, Sensor sensor)
+        public async Task<IActionResult> PutArea(int id, Area area)
         {
-            if (id != sensor.SensorId)
+            if (id != area.AreaId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(sensor).State = EntityState.Modified;
+            _context.Entry(area).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SensorExists(id))
+                if (!AreaExists(id))
                 {
                     return NotFound();
                 }
@@ -74,35 +74,35 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
             return NoContent();
         }
 
-        // POST: api/Sensores
+        // POST: api/Areas
         [HttpPost]
-        public async Task<ActionResult<Sensor>> PostSensor(Sensor sensor)
+        public async Task<ActionResult<Area>> PostArea(Area area)
         {
-            _context.Sensores.Add(sensor);
+            _context.Areas.Add(area);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSensor", new { id = sensor.SensorId }, sensor);
+            return CreatedAtAction("GetArea", new { id = area.AreaId }, area);
         }
 
-        // DELETE: api/Sensores/5
+        // DELETE: api/Areas/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Sensor>> DeleteSensor(int id)
+        public async Task<ActionResult<Area>> DeleteArea(int id)
         {
-            var sensor = await _context.Sensores.FindAsync(id);
-            if (sensor == null)
+            var area = await _context.Areas.FindAsync(id);
+            if (area == null)
             {
                 return NotFound();
             }
 
-            _context.Sensores.Remove(sensor);
+            _context.Areas.Remove(area);
             await _context.SaveChangesAsync();
 
-            return sensor;
+            return area;
         }
 
-        private bool SensorExists(int id)
+        private bool AreaExists(int id)
         {
-            return _context.Sensores.Any(e => e.SensorId == id);
+            return _context.Areas.Any(e => e.AreaId == id);
         }
     }
 }

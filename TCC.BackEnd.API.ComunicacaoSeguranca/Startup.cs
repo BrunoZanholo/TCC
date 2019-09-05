@@ -7,10 +7,12 @@ using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using TCC.BackEnd.API.Core.Data;
 
 namespace TCC.BackEnd.API.ComunicacaoSeguranca
 {
@@ -33,6 +35,10 @@ namespace TCC.BackEnd.API.ComunicacaoSeguranca
                         options.RequireHttpsMetadata = false;
                         options.ApiName = "tcc_auth"; // API Resource Id
                     });
+
+            services.AddDbContext<CoreContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("CoreContext")));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

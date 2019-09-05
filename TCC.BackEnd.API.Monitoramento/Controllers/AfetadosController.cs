@@ -14,46 +14,46 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class SensoresController : ControllerBase
+    public class AfetadosController : ControllerBase
     {
         private readonly CoreContext _context;
 
-        public SensoresController(CoreContext context)
+        public AfetadosController(CoreContext context)
         {
             _context = context;
         }
 
-        // GET: api/Sensores
+        // GET: api/Afetados
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Sensor>>> GetSensor()
+        public async Task<ActionResult<IEnumerable<Afetado>>> GetAfetados()
         {
-            return await _context.Sensores.ToListAsync();
+            return await _context.Afetados.ToListAsync();
         }
 
-        // GET: api/Sensores/5
+        // GET: api/Afetados/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Sensor>> GetSensor(int id)
+        public async Task<ActionResult<Afetado>> GetAfetado(int id)
         {
-            var sensor = await _context.Sensores.FindAsync(id);
+            var afetado = await _context.Afetados.FindAsync(id);
 
-            if (sensor == null)
+            if (afetado == null)
             {
                 return NotFound();
             }
 
-            return sensor;
+            return afetado;
         }
 
-        // PUT: api/Sensores/5
+        // PUT: api/Afetados/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSensor(int id, Sensor sensor)
+        public async Task<IActionResult> PutAfetado(int id, Afetado afetado)
         {
-            if (id != sensor.SensorId)
+            if (id != afetado.AfetadoId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(sensor).State = EntityState.Modified;
+            _context.Entry(afetado).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SensorExists(id))
+                if (!AfetadoExists(id))
                 {
                     return NotFound();
                 }
@@ -74,35 +74,35 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
             return NoContent();
         }
 
-        // POST: api/Sensores
+        // POST: api/Afetados
         [HttpPost]
-        public async Task<ActionResult<Sensor>> PostSensor(Sensor sensor)
+        public async Task<ActionResult<Afetado>> PostAfetado(Afetado afetado)
         {
-            _context.Sensores.Add(sensor);
+            _context.Afetados.Add(afetado);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSensor", new { id = sensor.SensorId }, sensor);
+            return CreatedAtAction("GetAfetado", new { id = afetado.AfetadoId }, afetado);
         }
 
-        // DELETE: api/Sensores/5
+        // DELETE: api/Afetados/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Sensor>> DeleteSensor(int id)
+        public async Task<ActionResult<Afetado>> DeleteAfetado(int id)
         {
-            var sensor = await _context.Sensores.FindAsync(id);
-            if (sensor == null)
+            var afetado = await _context.Afetados.FindAsync(id);
+            if (afetado == null)
             {
                 return NotFound();
             }
 
-            _context.Sensores.Remove(sensor);
+            _context.Afetados.Remove(afetado);
             await _context.SaveChangesAsync();
 
-            return sensor;
+            return afetado;
         }
 
-        private bool SensorExists(int id)
+        private bool AfetadoExists(int id)
         {
-            return _context.Sensores.Any(e => e.SensorId == id);
+            return _context.Afetados.Any(e => e.AfetadoId == id);
         }
     }
 }

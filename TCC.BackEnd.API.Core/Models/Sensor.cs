@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace TCC.BackEnd.API.Monitoramento.Models
+namespace TCC.BackEnd.API.Core.Models
 {
     public class Sensor
     {
         public int SensorId { get; set; }
-        public string Rotulo { get; set; }
+        public int AreaId { get; set; }        
+        public string Rotulo { get; set; }        
         public string Nome { get; set; }
     }
 }

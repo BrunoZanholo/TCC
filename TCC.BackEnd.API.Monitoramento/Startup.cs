@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using IdentityServer4.AccessTokenValidation;
+using TCC.BackEnd.API.Core.Data;
 
 namespace TCC.BackEnd.API.Monitoramento
 {
@@ -29,15 +30,15 @@ namespace TCC.BackEnd.API.Monitoramento
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-        .AddIdentityServerAuthentication(options =>
-        {
-            options.Authority = "http://localhost:3000"; // Auth Server
-                        options.RequireHttpsMetadata = false;
-            options.ApiName = "tcc_auth"; // API Resource Id
-                    });
+            .AddIdentityServerAuthentication(options =>
+            {
+                options.Authority = "http://localhost:3000"; // Auth Server
+                options.RequireHttpsMetadata = false;
+                options.ApiName = "tcc_auth"; // API Resource Id
+            });
 
-            services.AddDbContext<TCCBackEndAPIMonitoramentoContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("TCCBackEndAPIMonitoramentoContext")));
+            services.AddDbContext<CoreContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("CoreContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
