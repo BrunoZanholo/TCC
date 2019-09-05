@@ -125,3 +125,36 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
         //}
     }
 }
+
+
+/*
+ * 
+ * 
+ * Cadastro de sensores (id, area, tipo, rotulo) -> modulo de monitoramento
+Cadastro de areas (id, nome) -> modulo de monitoramento
+Cadastro de incidentes (id, area, classificacao, plano) -> modulo de monitoramento
+Cadastro de afetados (id, area, nome, email) -> modulo de monitoramento
+
+
+Atividade (rotuloSensor, tipo, intensidade) -> modulo de monitoramento
+-> recupera o sensor
+-> recupera a area
+-> if ((tipo atividade == tremor))
+{
+	if (intensidade > 10)
+{
+	gera ->	novo incidente (area do sensor, classificacao = 10)
+}
+}
+if (tipo atividade == ruido)
+{
+}
+
+Novo incidente -> modulo de monitoramento
+-> notifica modulo de seguranca para executar ou nao plano de acao
+
+
+Cadastro de planos de acao (id, nome, tipo, classificacao) -> modulo de seguranca
+
+
+*/
