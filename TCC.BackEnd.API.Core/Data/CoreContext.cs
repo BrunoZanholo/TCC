@@ -43,7 +43,6 @@ namespace TCC.BackEnd.API.Core.Data
                 model.ToTable("AFETADOS");
             });
 
-
             modelBuilder.Entity<Atividade>(model =>
             {
                 model.ToTable("ATIVIDADES");

@@ -10,11 +10,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4E628799-E66A-4F6B-95EA-84C5360F7FE9}"
 	ProjectSection(SolutionItems) = preProject
 		File.txt = File.txt
+		sql.sql = sql.sql
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.CadastrosAtivos", "TCC.BackEnd.API.CadastrosAtivos\TCC.BackEnd.API.CadastrosAtivos.csproj", "{98BAE3E4-CEF1-434B-BA6B-EAB1BB823FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.ComunicacaoSeguranca", "TCC.BackEnd.API.ComunicacaoSeguranca\TCC.BackEnd.API.ComunicacaoSeguranca.csproj", "{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.ComunicacaoSeguranca", "TCC.BackEnd.API.ComunicacaoSeguranca\TCC.BackEnd.API.ComunicacaoSeguranca.csproj", "{2B888676-15BD-4A53-9A0D-6C1D9E3D46A2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.Monitoramento", "TCC.BackEnd.API.Monitoramento\TCC.BackEnd.API.Monitoramento.csproj", "{9A423825-1FAE-47A3-B0A6-6E27FBF58B3E}"
 EndProject
@@ -30,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{EF31D444
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Externos", "Externos", "{BAB7FEDE-6248-48C0-8DD7-70C7D2D4FF8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCC.BackEnd.API.Core", "TCC.BackEnd.API.Core\TCC.BackEnd.API.Core.csproj", "{D273273E-ECF5-45E6-B73B-5D5942FCC38E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.Core", "TCC.BackEnd.API.Core\TCC.BackEnd.API.Core.csproj", "{D273273E-ECF5-45E6-B73B-5D5942FCC38E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

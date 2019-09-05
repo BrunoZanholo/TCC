@@ -14,7 +14,7 @@ using TCC.BackEnd.API.Core.Models;
 
 namespace TCC.BackEnd.API.Monitoramento.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AtividadesController : ControllerBase
@@ -84,17 +84,17 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
             var sensor = _context.Sensores.FirstOrDefault(s => s.Rotulo == atividade.RotuloSensor);
 
             if (sensor != null)
-            {                
-                if (atividade.Tipo == "tremor")
+            {
+                if (string.Equals(atividade.Tipo, "tremor", StringComparison.OrdinalIgnoreCase))
                 {
                     if (atividade.Intensidade > 10)
                     {
-                       await new IncidentesController(this._context).PostIncidente(new Incidente());
+                        var incidente = await new IncidentesController(this._context).PostIncidente(new Incidente { AreaId = sensor.AreaId, Classificacao = atividade.Intensidade, Data = DateTime.Now });
 
                         //gera novo incidente
                     }
                 }
-                else if (atividade.Tipo == "ruido")
+                else if (string.Equals(atividade.Tipo, "tremor", StringComparison.OrdinalIgnoreCase))
                 {
                     if (atividade.Intensidade > 80)
                     {
