@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -78,10 +81,39 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
         [HttpPost]
         public async Task<ActionResult<Atividade>> PostAtividade(Atividade atividade)
         {
-            _context.Atividades.Add(atividade);
-            await _context.SaveChangesAsync();
+            var sensor = _context.Sensores.FirstOrDefault(s => s.Rotulo == atividade.RotuloSensor);
 
-            return CreatedAtAction("GetAtividade", new { id = atividade.AtividadeId }, atividade);
+            if (sensor != null)
+            {                
+                if (atividade.Tipo == "tremor")
+                {
+                    if (atividade.Intensidade > 10)
+                    {
+                       await new IncidentesController(this._context).PostIncidente(new Incidente());
+
+                        //gera novo incidente
+                    }
+                }
+                else if (atividade.Tipo == "ruido")
+                {
+                    if (atividade.Intensidade > 80)
+                    {
+                        //gera novo incidente
+                    }
+                }
+                else
+                {
+                    return BadRequest("Tipo de atividade do sensor inválido");
+                }
+
+                _context.Atividades.Add(atividade);
+
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetAtividade", new { id = atividade.AtividadeId }, atividade);
+            }
+
+            return NotFound("Sensor não identificado!");
         }
 
         // DELETE: api/Atividades/5

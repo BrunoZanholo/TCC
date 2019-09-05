@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -80,6 +83,17 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
         {
             _context.Incidentes.Add(incidente);
             await _context.SaveChangesAsync();
+
+            if (incidente.Classificacao > 10)
+            {
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+                var client = new HttpClient();
+
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+                var content = await client.GetStringAsync("http://localhost:3003/api/PlanosAcao");
+            }
 
             return CreatedAtAction("GetIncidente", new { id = incidente.IncidenteId }, incidente);
         }
