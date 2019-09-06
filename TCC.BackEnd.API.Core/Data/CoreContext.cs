@@ -12,6 +12,7 @@ namespace TCC.BackEnd.API.Core.Data
         public CoreContext(DbContextOptions<CoreContext> options)
             : base(options)
         {
+           
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,17 +24,17 @@ namespace TCC.BackEnd.API.Core.Data
                 model.ToTable("SENSORES");
             });
 
-            modelBuilder.Entity<Sensor>(model =>
+            modelBuilder.Entity<Incidente>(model =>
             {
                 model.ToTable("INCIDENTES");
             });
 
-            modelBuilder.Entity<Sensor>(model =>
+            modelBuilder.Entity<PlanoAcao>(model =>
             {
                 model.ToTable("PLANOSACAO");
             });
 
-            modelBuilder.Entity<Sensor>(model =>
+            modelBuilder.Entity<Area>(model =>
             {
                 model.ToTable("AREAS");
             });

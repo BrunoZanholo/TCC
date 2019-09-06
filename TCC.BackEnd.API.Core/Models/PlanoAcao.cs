@@ -8,7 +8,8 @@ namespace TCC.BackEnd.API.Core.Models
     {
         public int PlanoAcaoId { get; set; }
         public string Nome { get; set; }
-        public string Tipo { get; set; }  
+        public string Tipo { get; set; }
+        public string Mensagem { get; set; }
         public int Classificacao { get; set; }
     }
 }

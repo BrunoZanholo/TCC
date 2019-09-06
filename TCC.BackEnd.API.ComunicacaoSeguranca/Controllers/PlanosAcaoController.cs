@@ -6,12 +6,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using TCC.BackEnd.API.Core.Data;
 using TCC.BackEnd.API.Core.Models;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace TCC.BackEnd.API.ComunicacaoSeguranca.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PlanosAcaoController : ControllerBase
@@ -98,6 +102,69 @@ namespace TCC.BackEnd.API.ComunicacaoSeguranca.Controllers
             await _context.SaveChangesAsync();
 
             return planoAcao;
+        }
+
+        [HttpPost("incidente/{id}")]
+        public async Task<ActionResult> PostTratarIncidente(int id)
+        {
+            var incidente = await _context.Incidentes.FindAsync(id);
+
+            if (incidente.Classificacao > 0)
+            {
+                var planoAcao = await _context.PlanosAcao.FirstOrDefaultAsync(pa => pa.Classificacao == incidente.Classificacao);
+
+                var area = await _context.Areas.FindAsync(incidente.AreaId);
+
+                if (planoAcao != null)
+                {
+                    var afetados = _context.Afetados.Where(af => af.AreaId == incidente.AreaId).ToList();
+
+                    Parallel.For(0, afetados.Count, index =>
+                    {
+                        var afetado = afetados[index];
+
+                        switch (planoAcao.Tipo.ToUpper())
+                        {
+                            case "EMAIL":
+                                {
+                                    var client = new SendGridClient("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");
+                                    var msg = new SendGridMessage()
+                                    {
+                                        From = new EmailAddress("tcc@puc.com.br", "TCC PUC"),
+                                        Subject = afetado.Nome,
+                                        PlainTextContent = "Área de risco: " + area.Nome + ". " + planoAcao.Mensagem,
+                                        HtmlContent = "<strong>" + "Área de risco: " + area.Nome + ". " + planoAcao.Mensagem + "</strong>"
+                                    };
+                                    msg.AddTo(new EmailAddress(afetado.Email, afetado.Nome));
+                                    client.SendEmailAsync(msg).Wait();
+
+                                    break;
+                                }
+                            case "SMS":
+                                {
+                                    const string accountSid = "ACa9213b350d6d061b6ae76875fa4bf822";
+                                    const string authToken = "cb67dda7832a522e1edca99b051a65f9";
+
+                                    try
+                                    {
+                                        TwilioClient.Init(accountSid, authToken);
+
+                                        var message = MessageResource.Create(
+                                            body: "Área de risco: " + area.Nome + ". " + planoAcao.Mensagem,
+                                            from: new Twilio.Types.PhoneNumber("+16575004717"),
+                                            to: new Twilio.Types.PhoneNumber("+55" + afetado.Celular)
+                                        );
+                                    }
+                                    catch { }
+
+                                    break;
+                                }
+                        }
+                    });
+                }
+            }
+
+            return Ok();
         }
 
         private bool PlanoAcaoExists(int id)

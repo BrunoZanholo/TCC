@@ -20,10 +20,12 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
     public class IncidentesController : ControllerBase
     {
         private readonly CoreContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public IncidentesController(CoreContext context)
+        public IncidentesController(CoreContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: api/Incidentes
@@ -86,13 +88,19 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
 
             if (incidente.Classificacao > 10)
             {
-                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var accessToken = _httpContextAccessor.HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+                try
+                {
+                    var client = new HttpClient();
 
-                var client = new HttpClient();
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-                var content = await client.GetStringAsync("http://localhost:3003/api/PlanosAcao");
+                    var content = await client.PostAsync(new Uri("http://localhost:3003/api/PlanosAcao/incidente/" + incidente.IncidenteId), null);
+                }
+                catch (Exception ex)
+                {
+                    var str = ex.GetBaseException().Message;
+                }
             }
 
             return CreatedAtAction("GetIncidente", new { id = incidente.IncidenteId }, incidente);
@@ -118,11 +126,6 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
         {
             return _context.Incidentes.Any(e => e.IncidenteId == id);
         }
-
-        //private void TratarIncidente(Incidente incidente)
-        //{
-        //    if (incidente.c)
-        //}
     }
 }
 

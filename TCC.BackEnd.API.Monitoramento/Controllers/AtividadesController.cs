@@ -20,10 +20,12 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
     public class AtividadesController : ControllerBase
     {
         private readonly CoreContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AtividadesController(CoreContext context)
+        public AtividadesController(CoreContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         // GET: api/Atividades
@@ -79,7 +81,7 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
 
         // POST: api/Atividades
         [HttpPost]
-        public async Task<ActionResult<Atividade>> PostAtividade(Atividade atividade)
+        public async Task<ActionResult<Atividade>> PostAtividade([FromForm] Atividade atividade)
         {
             var sensor = _context.Sensores.FirstOrDefault(s => s.Rotulo == atividade.RotuloSensor);
 
@@ -89,12 +91,17 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
                 {
                     if (atividade.Intensidade > 10)
                     {
-                        var incidente = await new IncidentesController(this._context).PostIncidente(new Incidente { AreaId = sensor.AreaId, Classificacao = atividade.Intensidade, Data = DateTime.Now });
+                        var incidente = await new IncidentesController(this._context, this._httpContextAccessor).PostIncidente(new Incidente
+                        {
+                            AreaId = sensor.AreaId,
+                            Classificacao = atividade.Intensidade,
+                            Data = DateTime.Now
+                        });
 
                         //gera novo incidente
                     }
                 }
-                else if (string.Equals(atividade.Tipo, "tremor", StringComparison.OrdinalIgnoreCase))
+                else if (string.Equals(atividade.Tipo, "ruido", StringComparison.OrdinalIgnoreCase))
                 {
                     if (atividade.Intensidade > 80)
                     {

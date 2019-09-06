@@ -8,6 +8,7 @@ namespace TCC.BackEnd.API.Core.Models
     {
         public int AfetadoId { get; set; }
         public int AreaId { get; set; }
+        public string Nome { get; set; }
         public string Email { get; set; }
         public string Celular { get; set; }
     }

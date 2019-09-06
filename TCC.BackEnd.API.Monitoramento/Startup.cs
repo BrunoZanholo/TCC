@@ -35,7 +35,10 @@ namespace TCC.BackEnd.API.Monitoramento
                 options.Authority = "http://localhost:3000"; // Auth Server
                 options.RequireHttpsMetadata = false;
                 options.ApiName = "tcc_auth"; // API Resource Id
+                options.SaveToken = true;               
             });
+
+            services.AddHttpContextAccessor();
 
             services.AddDbContext<CoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CoreContext")));
