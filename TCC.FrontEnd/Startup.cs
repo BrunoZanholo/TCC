@@ -41,8 +41,12 @@ namespace TCC.FrontEnd
             {
                 //options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme; // cookie middle setup above
                 options.SignedOutRedirectUri = "/";
+#if DEBUG
                 options.Authority = "http://localhost:3000"; // Auth Server
                 options.RequireHttpsMetadata = false; // only for development 
+#else
+                options.Authority = "https://api-tcc-autenticacao.azurewebsites.net"; // Auth Server
+#endif
                 options.ClientId = "tcc_auth_client"; // client setup in Auth Server
                 options.ClientSecret = "secret";
                 //options.ResponseType = "code id_token"; // means Hybrid flow (id + access token)

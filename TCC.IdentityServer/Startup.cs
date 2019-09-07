@@ -22,7 +22,7 @@ namespace TCC.IdentityServer
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
+        {
             services.AddIdentityServer()
                         .AddDeveloperSigningCredential(filename: "tempkey.rsa")
                         .AddInMemoryApiResources(Config.GetApiResources())

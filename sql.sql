@@ -14,7 +14,7 @@ CREATE TABLE DBO.SENSORES
 	Nome varchar(100) not null,
 )
 
-insert into SENSORES values (1, 'x12', 'teste')
+insert into SENSORES values (1, 'x10', 'teste')
 GO
 --DROP TABLE AFETADOS
 

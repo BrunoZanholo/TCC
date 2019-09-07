@@ -42,8 +42,13 @@ namespace TCC.IdentityServer
                     AllowOfflineAccess = true,
                     RequireConsent = false,
 
+#if DEBUG
                     RedirectUris = { "http://localhost:3001/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:3001/signout-callback-oidc" },
+#else
+                    RedirectUris = { "https://front-tcc.azurewebsites.net/signin-oidc" },
+                    PostLogoutRedirectUris = { "https://front-tcc.azurewebsites.net/signout-callback-oidc" },
+#endif
 
                     AllowedScopes =
                     {

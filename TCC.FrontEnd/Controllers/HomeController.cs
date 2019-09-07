@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TCC.FrontEnd.Models;
 
@@ -23,9 +24,10 @@ namespace TCC.FrontEnd.Controllers
             return View();
         }
 
-        public async Task Login()
+        [Authorize]
+        public IActionResult Login()
         {
-            await Task.FromResult(0);
+            return View("Index");
         }
 
         public async Task Logout()
