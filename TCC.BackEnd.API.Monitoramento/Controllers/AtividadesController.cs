@@ -103,14 +103,19 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
                 }
                 else if (string.Equals(atividade.Tipo, "ruido", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (atividade.Intensidade > 80)
+                    if (atividade.Intensidade > 70)
                     {
-                        //gera novo incidente
+                        var incidente = await new IncidentesController(this._context, this._httpContextAccessor).PostIncidente(new Incidente
+                        {
+                            AreaId = sensor.AreaId,
+                            Classificacao = atividade.Intensidade,
+                            Data = DateTime.Now
+                        });
                     }
                 }
                 else
                 {
-                    return BadRequest("Tipo de atividade do sensor inválido");
+                    return BadRequest("Tipo de atividade do sensor inválido. Válidos para a POC: ruido, tremor");
                 }
 
                 _context.Atividades.Add(atividade);
