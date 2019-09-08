@@ -23,6 +23,13 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
             _context = context;
         }
 
+        // GET: api/Afetados/area/{id}
+        [HttpGet("area/{id}")]
+        public async Task<ActionResult<IEnumerable<Afetado>>> GetAfetadosArea(int id)
+        {
+            return await _context.Afetados.Where(s => s.AreaId == id).ToListAsync();
+        }
+
         // GET: api/Afetados
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Afetado>>> GetAfetados()

@@ -1,0 +1,93 @@
+﻿@model TCC.FrontEnd.Models.Area
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<div>
+    <h4>Área @Html.DisplayFor(model => model.Nome) </h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AreaId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AreaId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.AreaId }) |
+    <a asp-action="Index">Voltar</a>
+</div>
+<br />
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Sensores</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sensores.First().Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sensores.First().Rotulo)
+                        </th>
+                        <th><a asp-action="Create">Adicionar novo sensor</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Sensores)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Rotulo)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.AreaId }) |
+                                @Html.ActionLink("Excluir", "Delete", new { id = item.AreaId })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4>Afetados</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Afetados.First().Nome)
+                        </th>
+                        <th><a asp-action="Create">Adicionar novo afetado</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Afetados)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.AreaId }) |
+                                @Html.ActionLink("Excluir", "Delete", new { id = item.AreaId })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

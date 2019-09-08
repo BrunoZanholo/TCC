@@ -57,7 +57,6 @@ namespace TCC.FrontEnd
                 options.SaveTokens = true;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

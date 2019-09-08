@@ -11,7 +11,7 @@ using TCC.BackEnd.API.Core.Models;
 
 namespace TCC.BackEnd.API.Monitoramento.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SensoresController : ControllerBase
@@ -21,6 +21,13 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
         public SensoresController(CoreContext context)
         {
             _context = context;
+        }
+
+        // GET: api/Sensores/area/{id}
+        [HttpGet("area/{id}")]
+        public async Task<ActionResult<IEnumerable<Sensor>>> GetSensoresArea(int id)
+        {
+            return await _context.Sensores.Where(s => s.AreaId == id).ToListAsync();
         }
 
         // GET: api/Sensores
