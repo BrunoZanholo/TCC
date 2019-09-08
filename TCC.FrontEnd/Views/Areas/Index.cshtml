@@ -6,28 +6,30 @@
 
 <h4>Áreas</h4>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th><a asp-action="Create">Criar nova área</a></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderBy(m => m.Nome))
-        {
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.AreaId }) |
-                    @Html.ActionLink("Detalhes", "Details", new { id = item.AreaId }) |
-                    @Html.ActionLink("Excluir", "Delete", new { id = item.AreaId })
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th><a asp-action="Create">Criar nova área</a></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderBy(m => m.Nome))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.AreaId }) |
+                        @Html.ActionLink("Detalhes", "Details", new { id = item.AreaId }) |
+                        @Html.ActionLink("Excluir", "Delete", new { id = item.AreaId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

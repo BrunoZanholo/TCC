@@ -38,7 +38,7 @@ namespace TCC.IdentityServer
                 new Client
                 {
                     ClientId = "tcc_auth_client",
-                    ClientName = "TCC.Auth.Client",
+                    ClientName = "SCA",
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,

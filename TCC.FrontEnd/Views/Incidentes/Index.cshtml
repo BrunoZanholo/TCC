@@ -6,44 +6,46 @@
 
 <h4>Incidentes</h4>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Data)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Area)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().PlanoAcao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Classificacao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.OrderByDescending(m => m.Data))
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlanoAcao.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Classificacao)
-            </td>
-            <td>
-                @Html.ActionLink("Detalhes", "Details", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Area)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().PlanoAcao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Classificacao)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderByDescending(m => m.Data))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Area.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PlanoAcao.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Classificacao)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Detalhes", "Details", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
