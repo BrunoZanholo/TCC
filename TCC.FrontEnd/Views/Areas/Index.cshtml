@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TCC.FrontEnd.Models.Area>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Áreas";
 }
 
 <h4>Áreas</h4>
@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderBy(m => m.Nome))
         {
             <tr>
                 <td>

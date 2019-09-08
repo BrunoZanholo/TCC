@@ -33,10 +33,10 @@ namespace TCC.BackEnd.API.ComunicacaoSeguranca
                     {
 #if DEBUG
                         options.Authority = "http://localhost:3000"; // Auth Server
+                        options.RequireHttpsMetadata = false;
 #else
                         options.Authority = "https://api-tcc-autenticacao.azurewebsites.net"; // Auth Server
-#endif
-                        options.RequireHttpsMetadata = false;
+#endif                        
                         options.ApiName = "tcc_auth"; // API Resource Id
                     });
 

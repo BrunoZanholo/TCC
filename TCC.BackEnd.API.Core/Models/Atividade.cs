@@ -10,5 +10,7 @@ namespace TCC.BackEnd.API.Core.Models
         public string RotuloSensor { get; set; }
         public string Tipo { get; set; }
         public int Intensidade { get; set; }
+        public DateTime Data { get; set; }
+        public Sensor Sensor { get; set; }
     }
 }

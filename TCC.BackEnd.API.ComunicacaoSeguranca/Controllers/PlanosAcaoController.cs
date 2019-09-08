@@ -113,6 +113,10 @@ namespace TCC.BackEnd.API.ComunicacaoSeguranca.Controllers
             {
                 var planoAcao = await _context.PlanosAcao.FirstOrDefaultAsync(pa => pa.Classificacao == incidente.Classificacao);
 
+                incidente.PlanoAcaoId = planoAcao.PlanoAcaoId;
+
+                await _context.SaveChangesAsync();
+
                 var area = await _context.Areas.FindAsync(incidente.AreaId);
 
                 if (planoAcao != null)

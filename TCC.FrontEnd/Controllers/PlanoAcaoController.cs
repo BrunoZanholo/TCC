@@ -1,18 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TCC.FrontEnd.Models;
 
 namespace TCC.FrontEnd.Controllers
 {
+    [Authorize]
     public class PlanoAcaoController : Controller
     {
         // GET: PlanoAcao
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            try
+            {
+                HttpResponseMessage response = await ApiGet("api/planosacao");
+
+                var planos = await response.Content.ReadAsAsync<List<PlanoAcao>>();
+
+                return View(planos);
+            }
+            catch (Exception ex)
+            {
+                var str = ex.GetBaseException().Message;
+            }
+
             return View();
+        }
+
+        private async Task<HttpResponseMessage> ApiGet(string rota)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+            var response = await client.GetAsync("http://localhost:3003/" + rota);
+
+            return response;
         }
 
         // GET: PlanoAcao/Details/5

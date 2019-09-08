@@ -27,11 +27,13 @@ namespace TCC.BackEnd.API.Core.Data
             modelBuilder.Entity<Incidente>(model =>
             {
                 model.ToTable("INCIDENTES");
+                model.Ignore(m => m.PlanoAcao);
+                model.Ignore(m => m.Area);
             });
 
             modelBuilder.Entity<PlanoAcao>(model =>
             {
-                model.ToTable("PLANOSACAO");
+                model.ToTable("PLANOSACAO");            
             });
 
             modelBuilder.Entity<Area>(model =>
@@ -47,6 +49,7 @@ namespace TCC.BackEnd.API.Core.Data
             modelBuilder.Entity<Atividade>(model =>
             {
                 model.ToTable("ATIVIDADES");
+                model.Ignore(m => m.Sensor);
             });
         }
 

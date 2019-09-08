@@ -11,5 +11,7 @@ namespace TCC.BackEnd.API.Core.Models
         public DateTime Data { get; set; }
         public int PlanoAcaoId { get; set; }
         public int Classificacao { get; set; }
+        public Area Area { get; set; }
+        public PlanoAcao PlanoAcao { get; set; }
     }
 }

@@ -5,12 +5,14 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TCC.FrontEnd.Models;
 
 namespace TCC.FrontEnd.Controllers
 {
+    [Authorize]
     public class AreasController : Controller
     {
         // GET: Areas

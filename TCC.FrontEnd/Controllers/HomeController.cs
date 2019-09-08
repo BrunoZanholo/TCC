@@ -30,6 +30,7 @@ namespace TCC.FrontEnd.Controllers
             return View("Index");
         }
 
+        [Authorize]
         public async Task Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

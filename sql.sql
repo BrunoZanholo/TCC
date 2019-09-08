@@ -50,8 +50,12 @@ CREATE TABLE DBO.ATIVIDADES
 	RotuloSensor varchar(100) not null,
 	Tipo varchar(100) not null,
 	Intensidade int not null,
+	Data datetime2 not null default((getdate()))
 )
 GO
+
+alter table ATIVIDADES add Data datetime not null default((getdate()))
+
 --DROP TABLE INCIDENTES
 
 select * from INCIDENTES
@@ -82,8 +86,6 @@ INSERT INTO PLANOSACAO VALUES ('SMS', 'ALERTA 30', 30, 'Alerta classificação 30'
 
 INSERT INTO PLANOSACAO VALUES ('SMS', 'EVACUAÇÃO 90', 90, 'Evacuação classificação 90')
 INSERT INTO PLANOSACAO VALUES ('SMS', 'EVACUAÇÃO 100', 100, 'Evacuação classificação 100')
-
-
 
 INSERT INTO PLANOSACAO VALUES ('EMAIL', 'EVACUAÇÃO 60', 60, 'Evacuação classificação 60')
 INSERT INTO PLANOSACAO VALUES ('EMAIL', 'EVACUAÇÃO 70', 70, 'Evacuação classificação 70')

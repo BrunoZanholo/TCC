@@ -32,7 +32,14 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Atividade>>> GetAtividades()
         {
-            return await _context.Atividades.ToListAsync();
+            var atividades = await _context.Atividades.ToListAsync();
+
+            atividades.ForEach(a =>
+            {
+                a.Sensor = _context.Sensores.FirstOrDefault(s => s.Rotulo == a.RotuloSensor);
+            });
+
+            return atividades;
         }
 
         // GET: api/Atividades/5
@@ -87,6 +94,12 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
 
             if (sensor != null)
             {
+                atividade.Data = DateTime.Now;
+
+                _context.Atividades.Add(atividade);
+
+                await _context.SaveChangesAsync();
+
                 if (string.Equals(atividade.Tipo, "tremor", StringComparison.OrdinalIgnoreCase))
                 {
                     if (atividade.Intensidade > 10)
@@ -117,10 +130,6 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
                 {
                     return BadRequest("Tipo de atividade do sensor inválido. Válidos para a POC: ruido, tremor");
                 }
-
-                _context.Atividades.Add(atividade);
-
-                await _context.SaveChangesAsync();
 
                 return CreatedAtAction("GetAtividade", new { id = atividade.AtividadeId }, atividade);
             }

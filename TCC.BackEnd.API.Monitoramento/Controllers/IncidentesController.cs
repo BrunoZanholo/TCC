@@ -32,7 +32,15 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Incidente>>> GetIncidente()
         {
-            return await _context.Incidentes.ToListAsync();
+            var incidentes = await _context.Incidentes.ToListAsync();
+
+            incidentes.ForEach(a =>
+            {
+                a.Area = _context.Areas.FirstOrDefault(s => s.AreaId == a.AreaId);
+                a.PlanoAcao = _context.PlanosAcao.FirstOrDefault(s => s.PlanoAcaoId == a.PlanoAcaoId);
+            });
+
+            return incidentes;
         }
 
         // GET: api/Incidentes/5
@@ -83,6 +91,7 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
         [HttpPost]
         public async Task<ActionResult<Incidente>> PostIncidente(Incidente incidente)
         {
+            
             _context.Incidentes.Add(incidente);
             await _context.SaveChangesAsync();
 
