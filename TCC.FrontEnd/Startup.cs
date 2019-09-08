@@ -29,6 +29,11 @@ namespace TCC.FrontEnd
         {
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
+            services.AddHttpsRedirection(options =>
+            {
+                options.HttpsPort = 443;
+            });
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -39,14 +44,21 @@ namespace TCC.FrontEnd
             .AddCookie()
             .AddOpenIdConnect(options =>
             {
+                var url = this.Configuration.GetValue<string>("tcc-api:autenticacao");
+
                 //options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme; // cookie middle setup above
                 options.SignedOutRedirectUri = "/";
 #if DEBUG
-                options.Authority = "http://localhost:3000"; // Auth Server
+                //options.Authority = "http://localhost:3000"; // Auth Server
                 options.RequireHttpsMetadata = false; // only for development 
 #else
-                options.Authority = "https://api-tcc-autenticacao.azurewebsites.net"; // Auth Server
+                //options.Authority = "https://api-tcc-autenticacao.azurewebsites.net"; // Auth Server
+
+                
+                options.RequireHttpsMetadata = true; // only for development 
 #endif
+
+                options.Authority = url;
                 options.ClientId = "tcc_auth_client"; // client setup in Auth Server
                 options.ClientSecret = "secret";
                 //options.ResponseType = "code id_token"; // means Hybrid flow (id + access token)
@@ -63,6 +75,12 @@ namespace TCC.FrontEnd
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if (!env.IsDevelopment())
+            {
+                app.UseHsts();
+                app.UseHttpsRedirection();
+            }
+
             app.UseDeveloperExceptionPage();
             app.UseAuthentication();
             app.UseStaticFiles();

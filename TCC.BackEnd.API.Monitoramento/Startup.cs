@@ -37,6 +37,7 @@ namespace TCC.BackEnd.API.Monitoramento
                 options.RequireHttpsMetadata = false;
 #else
                 options.Authority = "https://api-tcc-autenticacao.azurewebsites.net"; // Auth Server
+                //options.RequireHttpsMetadata = true;
 #endif
                 options.ApiName = "tcc_auth"; // API Resource Id
                 options.SaveToken = true;               

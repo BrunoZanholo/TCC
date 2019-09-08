@@ -2,6 +2,7 @@
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -26,8 +27,10 @@ namespace TCC.IdentityServer
             };
         }
 
-        public static IEnumerable<Client> GetClients()
+        public static IEnumerable<Client> GetClients(IConfiguration configuration)
         {
+            var url = configuration.GetValue<string>("tcc-front");
+
             return new List<Client>
             {
                 // Hybrid Flow = OpenId Connect + OAuth
@@ -35,20 +38,23 @@ namespace TCC.IdentityServer
                 new Client
                 {
                     ClientId = "tcc_auth_client",
-                    ClientName = "SCA",
+                    ClientName = "TCC.Auth.Client",
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
                     AllowOfflineAccess = true,
                     RequireConsent = false,
 
-#if DEBUG
-                    RedirectUris = { "http://localhost:3001/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:3001/signout-callback-oidc" },
-#else
-                    RedirectUris = { "https://front-tcc.azurewebsites.net/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://front-tcc.azurewebsites.net/signout-callback-oidc" },
-#endif
+                    RedirectUris = { url + "/signin-oidc" },
+                    PostLogoutRedirectUris = { url + "/signout-callback-oidc" },
+
+//#if DEBUG
+//                    RedirectUris = { "http://localhost:3001/signin-oidc" },
+//                    PostLogoutRedirectUris = { "http://localhost:3001/signout-callback-oidc" },
+//#else
+//                    RedirectUris = { "https://front-tcc.azurewebsites.net/signin-oidc" },
+//                    PostLogoutRedirectUris = { "https://front-tcc.azurewebsites.net/signout-callback-oidc" },
+//#endif
 
                     AllowedScopes =
                     {

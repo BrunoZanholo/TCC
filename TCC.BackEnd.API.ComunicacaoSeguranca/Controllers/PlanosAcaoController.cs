@@ -15,7 +15,7 @@ using Twilio.Rest.Api.V2010.Account;
 
 namespace TCC.BackEnd.API.ComunicacaoSeguranca.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PlanosAcaoController : ControllerBase

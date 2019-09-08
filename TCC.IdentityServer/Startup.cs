@@ -27,7 +27,7 @@ namespace TCC.IdentityServer
                         .AddDeveloperSigningCredential(filename: "tempkey.rsa")
                         .AddInMemoryApiResources(Config.GetApiResources())
                         .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                        .AddInMemoryClients(Config.GetClients())
+                        .AddInMemoryClients(Config.GetClients(this.Configuration))
                         .AddTestUsers(Config.GetUsers());
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

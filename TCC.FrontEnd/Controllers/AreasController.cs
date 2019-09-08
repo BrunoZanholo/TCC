@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using TCC.FrontEnd.Models;
 
 namespace TCC.FrontEnd.Controllers
@@ -15,23 +16,23 @@ namespace TCC.FrontEnd.Controllers
     [Authorize]
     public class AreasController : Controller
     {
+        private readonly IConfiguration configuration;
+
+        public AreasController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         // GET: Areas
         public async Task<ActionResult> Index()
         {
-            try
-            {
-                HttpResponseMessage response = await ApiGet("api/areas");
+            HttpResponseMessage response = await ApiGet("api/areas");
 
-                var areas = await response.Content.ReadAsAsync<List<Area>>();
+            response.EnsureSuccessStatusCode();
 
-                return View(areas);
-            }
-            catch (Exception ex)
-            {
-                var str = ex.GetBaseException().Message;
-            }
+            var areas = await response.Content.ReadAsAsync<List<Area>>();
 
-            return View();
+            return View(areas);
         }
 
         private async Task<HttpResponseMessage> ApiGet(string rota)
@@ -42,7 +43,11 @@ namespace TCC.FrontEnd.Controllers
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-            var response = await client.GetAsync("http://localhost:3005/" + rota);
+            var url = this.configuration.GetValue<string>("tcc-api:monitoramento");
+
+            //var response = await client.GetAsync("http://localhost:3005/" + rota);
+
+            var response = await client.GetAsync(url + "/" + rota);
 
             return response;
         }

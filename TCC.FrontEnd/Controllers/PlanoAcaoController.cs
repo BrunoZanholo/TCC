@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using TCC.FrontEnd.Models;
 
 namespace TCC.FrontEnd.Controllers
@@ -15,6 +16,13 @@ namespace TCC.FrontEnd.Controllers
     [Authorize]
     public class PlanoAcaoController : Controller
     {
+        private readonly IConfiguration configuration;
+
+        public PlanoAcaoController(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         // GET: PlanoAcao
         public async Task<ActionResult> Index()
         {
@@ -38,11 +46,13 @@ namespace TCC.FrontEnd.Controllers
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 
+            var url = this.configuration.GetValue<string>("tcc-api:comunicacao");
+
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-            var response = await client.GetAsync("http://localhost:3003/" + rota);
+            var response = await client.GetAsync(url + "/" + rota);
 
             return response;
         }

@@ -11,7 +11,7 @@ using TCC.BackEnd.API.Core.Models;
 
 namespace TCC.BackEnd.API.Monitoramento.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SensoresController : ControllerBase
