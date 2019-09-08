@@ -31,6 +31,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{EF31D444
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCC.BackEnd.API.Core", "TCC.BackEnd.API.Core\TCC.BackEnd.API.Core.csproj", "{D273273E-ECF5-45E6-B73B-5D5942FCC38E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{C7BFF43D-D651-448E-B96A-B8608E2AB272}"
+	ProjectSection(SolutionItems) = preProject
+		Bruno Zanholo.pdf = Bruno Zanholo.pdf
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
