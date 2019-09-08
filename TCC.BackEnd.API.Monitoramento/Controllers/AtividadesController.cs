@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TCC.BackEnd.API.Core.Data;
 using TCC.BackEnd.API.Core.Models;
 
@@ -21,11 +22,13 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
     {
         private readonly CoreContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public AtividadesController(CoreContext context, IHttpContextAccessor httpContextAccessor)
+        private readonly IConfiguration _configuration;
+      
+        public AtividadesController(CoreContext context, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            this._configuration = configuration;
         }
 
         // GET: api/Atividades
@@ -104,7 +107,7 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
                 {
                     if (atividade.Intensidade > 10)
                     {
-                        var incidente = await new IncidentesController(this._context, this._httpContextAccessor).PostIncidente(new Incidente
+                        var incidente = await new IncidentesController(this._context, this._httpContextAccessor, this._configuration).PostIncidente(new Incidente
                         {
                             AreaId = sensor.AreaId,
                             Classificacao = atividade.Intensidade,
@@ -118,7 +121,7 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
                 {
                     if (atividade.Intensidade > 70)
                     {
-                        var incidente = await new IncidentesController(this._context, this._httpContextAccessor).PostIncidente(new Incidente
+                        var incidente = await new IncidentesController(this._context, this._httpContextAccessor, this._configuration).PostIncidente(new Incidente
                         {
                             AreaId = sensor.AreaId,
                             Classificacao = atividade.Intensidade,

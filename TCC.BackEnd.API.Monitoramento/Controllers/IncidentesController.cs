@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using TCC.BackEnd.API.Core.Data;
 using TCC.BackEnd.API.Core.Models;
 
@@ -21,11 +22,13 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
     {
         private readonly CoreContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration _configuration;
 
-        public IncidentesController(CoreContext context, IHttpContextAccessor httpContextAccessor)
+        public IncidentesController(CoreContext context, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _configuration = configuration;
         }
 
         // GET: api/Incidentes
@@ -104,7 +107,9 @@ namespace TCC.BackEnd.API.Monitoramento.Controllers
 
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-                    var content = await client.PostAsync(new Uri("http://localhost:3003/api/PlanosAcao/incidente/" + incidente.IncidenteId), null);
+                    var url = this._configuration.GetValue<string>("tcc-api:comunicacao");
+
+                    var content = await client.PostAsync(new Uri(url + "/api/PlanosAcao/incidente/" + incidente.IncidenteId), null);
                 }
                 catch (Exception ex)
                 {
